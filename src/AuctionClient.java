@@ -10,45 +10,72 @@ public class AuctionClient {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             Scanner scanner = new Scanner(System.in);
 
-            in.readLine();
-            System.out.print("Digite seu usuario: ");
-            out.println(scanner.nextLine());
+            String statusInfo = "";
 
-            in.readLine();
-            System.out.print("Digite sua senha: ");
-            out.println(scanner.nextLine());
+            while (true) {
+                String serverCommand = in.readLine();
+                if (serverCommand == null) return;
 
-            String authResponse = in.readLine();
-            if (authResponse == null || authResponse.equals("ACESSO_NEGADO")) {
-                System.out.println("\n[ERRO] Usuario ou senha invalidos.");
-                return;
+                if (serverCommand.equals("AUTH_REQUIRED") || serverCommand.equals("AUTH_RETRY")) {
+                    if (serverCommand.equals("AUTH_RETRY")) {
+                        System.out.println("\n[ERRO] Credenciais invalidas. Tente novamente.");
+                    } else {
+                        System.out.println("[MODO PRIVADO]");
+                    }
+                    System.out.print(in.readLine());
+                    out.println(scanner.nextLine());
+                    System.out.print(in.readLine());
+                    out.println(scanner.nextLine());
+                } else if (serverCommand.equals("AUTH_NONE")) {
+                    System.out.println("[MODO PUBLICO]");
+                    System.out.print(in.readLine());
+                    out.println(scanner.nextLine());
+                } else if (serverCommand.equals("ACESSO_NEGADO")) {
+                    System.out.println("\n[ERRO] Acesso negado. Limite de tentativas excedido.");
+                    return;
+                } else if (serverCommand.startsWith("LOGIN_OK")) {
+                    statusInfo = serverCommand;
+                    break;
+                }
             }
 
-            System.out.println("\n" + authResponse);
-            System.out.println("Sua conexao esta criptografada com Base64.");
-            System.out.print("Seu lance: ");
+            String[] info = statusInfo.split(":");
+            System.out.println("\n========================================");
+            System.out.println("Bem-vindo ao leilao de: " + info[1].toUpperCase());
+            System.out.println("Lance atual: R$ " + info[2]);
+            System.out.println("========================================\n");
 
-            Thread listener = new Thread(() -> {
+            Thread t = new Thread(() -> {
                 try {
                     String s;
                     while ((s = in.readLine()) != null) {
-                        System.out.print("\r" + s + "\nSeu lance: ");
+                        System.out.print("\r" + s + "\n");
+
+                        if (s.startsWith("ENCERRADO")) {
+                            System.out.println("\n[SISTEMA] O leilao chegou ao fim. Ate a proxima!");
+                            System.exit(0);
+                        }
+
+                        System.out.print("Seu lance: ");
                     }
                 } catch (IOException ignored) {}
             });
-            listener.setDaemon(true);
-            listener.start();
+            t.setDaemon(true);
+            t.start();
 
+            System.out.print("Seu lance: ");
             while (true) {
                 if (scanner.hasNextLine()) {
                     String lance = scanner.nextLine();
                     if (lance.isEmpty()) continue;
+
                     String encoded = Base64.getEncoder().encodeToString(lance.getBytes());
                     out.println(encoded);
                 }
             }
+
         } catch (IOException e) {
-            System.out.println("O servidor nao esta respondendo.");
+            System.out.println("\n[ERRO] Nao foi possivel conectar. O servidor esta online?");
         }
     }
 }

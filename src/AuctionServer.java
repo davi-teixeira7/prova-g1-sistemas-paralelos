@@ -8,19 +8,38 @@ public class AuctionServer {
     private static double currentBid = 0.0;
     private static String highestBidder = "Nenhum";
     private static boolean isActive = true;
-    private static Set<PrintWriter> clientWriters = new HashSet<>();
-    private static List<String> history = new ArrayList<>();
-
-    private static final Map<String, String> CREDENCIAIS = Map.of(
-            "nicole", "123",
-            "davi", "g1",
-            "admin", "admin"
-    );
+    private static boolean isPrivado = false;
+    private static ServerSocket serverSocket;
+    private static final Set<PrintWriter> clientWriters = new HashSet<>();
+    private static final Map<String, String> CREDENCIAIS = new HashMap<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Item: ");
+
+        System.out.println("--- CONFIGURAÇÃO DO LEILÃO ---");
+        System.out.print("Nome do item: ");
         itemName = scanner.nextLine();
+
+        System.out.print("Tipo de leilao (1-Publico | 2-Privado): ");
+        String opcao = scanner.nextLine();
+
+        if (opcao.equals("2")) {
+            isPrivado = true;
+            System.out.print("Quantas pessoas deseja cadastrar? ");
+            int qtd = Integer.parseInt(scanner.nextLine());
+
+            for (int i = 1; i <= qtd; i++) {
+                System.out.println("\nCadastro " + i + "/" + qtd);
+                System.out.print("Usuario: ");
+                String u = scanner.nextLine();
+                System.out.print("Senha: ");
+                String p = scanner.nextLine();
+                CREDENCIAIS.put(u, p);
+            }
+        }
+
+        System.out.println("\n[SISTEMA] Servidor ON em modo " + (isPrivado ? "PRIVADO" : "PUBLICO"));
+        System.out.println("Digite 'encerrar' para finalizar o leilao.");
 
         new Thread(() -> {
             while (isActive) {
@@ -30,13 +49,14 @@ public class AuctionServer {
             }
         }).start();
 
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+        try {
+            serverSocket = new ServerSocket(PORT);
             while (isActive) {
-                Socket clientSocket = serverSocket.accept();
-                new Thread(new ClientHandler(clientSocket)).start();
+                Socket socket = serverSocket.accept();
+                new Thread(new ClientHandler(socket)).start();
             }
         } catch (IOException e) {
-            if (isActive) e.printStackTrace();
+            if (isActive) System.out.println("Erro no servidor: " + e.getMessage());
         }
     }
 
@@ -48,14 +68,13 @@ public class AuctionServer {
             if (amount > currentBid) {
                 currentBid = amount;
                 highestBidder = user;
-                String log = "Lance: " + user + " - R$ " + amount;
-                history.add(log);
                 broadcast("NOVO_LANCE:" + user + ":" + amount);
+                System.out.println("[LANCE] " + user + " ofertou R$ " + amount);
             } else {
-                writer.println("ERRO: Lance baixo.");
+                writer.println("SISTEMA: Lance negado! Valor atual: R$ " + currentBid);
             }
         } catch (Exception e) {
-            writer.println("ERRO: Formato invalido.");
+            writer.println("SISTEMA: Erro na descriptografia do lance.");
         }
     }
 
@@ -67,43 +86,61 @@ public class AuctionServer {
 
     private static void encerrarLeilao() {
         isActive = false;
-        broadcast("ENCERRADO:" + highestBidder + ":" + currentBid);
-        salvar();
-        System.exit(0);
-    }
 
-    private static void salvar() {
-        try (PrintWriter pw = new PrintWriter(new FileWriter("historico.txt"))) {
-            pw.println("Item: " + itemName + " | Vencedor: " + highestBidder);
-            for (String h : history) pw.println(h);
-        } catch (IOException ignored) {}
+        System.out.println("\n========================================");
+        System.out.println("      LEILÃO FINALIZADO OFICIALMENTE      ");
+        System.out.println("========================================");
+        System.out.println("VENCEDOR: " + highestBidder);
+        System.out.println("VALOR FINAL: R$ " + currentBid);
+        System.out.println("========================================\n");
+
+        broadcast("ENCERRADO: Vencedor: " + highestBidder + " | Total: R$ " + currentBid);
+
+        try {
+            if (serverSocket != null) serverSocket.close();
+        } catch (IOException e) {
+            System.out.println("Encerrando conexoes...");
+        }
+
+        System.exit(0);
     }
 
     private static class ClientHandler implements Runnable {
         private Socket socket;
-        private PrintWriter out;
-        private BufferedReader in;
-
         public ClientHandler(Socket socket) { this.socket = socket; }
 
         public void run() {
-            try {
-                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                out = new PrintWriter(socket.getOutputStream(), true);
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
 
-                out.println("Login: ");
-                String user = in.readLine();
-                out.println("Senha: ");
-                String pass = in.readLine();
+                String user = "";
+                if (isPrivado) {
+                    boolean autenticado = false;
+                    for (int tentativas = 0; tentativas < 3; tentativas++) {
+                        out.println(tentativas == 0 ? "AUTH_REQUIRED" : "AUTH_RETRY");
+                        out.println("Login: ");
+                        user = in.readLine();
+                        out.println("Senha: ");
+                        String pass = in.readLine();
 
-                if (!CREDENCIAIS.containsKey(user) || !CREDENCIAIS.get(user).equals(pass)) {
-                    out.println("ACESSO_NEGADO");
-                    socket.close();
-                    return;
+                        if (CREDENCIAIS.containsKey(user) && CREDENCIAIS.get(user).equals(pass)) {
+                            autenticado = true;
+                            break;
+                        }
+                    }
+
+                    if (!autenticado) {
+                        out.println("ACESSO_NEGADO");
+                        return;
+                    }
+                } else {
+                    out.println("AUTH_NONE");
+                    out.println("Seu Nome: ");
+                    user = in.readLine();
                 }
 
+                out.println("LOGIN_OK:" + itemName + ":" + currentBid);
                 synchronized (clientWriters) { clientWriters.add(out); }
-                out.println("ACESSO_OK:" + itemName + ":" + currentBid);
 
                 String msg;
                 while ((msg = in.readLine()) != null) {
@@ -111,7 +148,6 @@ public class AuctionServer {
                 }
             } catch (IOException e) {
             } finally {
-                synchronized (clientWriters) { clientWriters.remove(out); }
                 try { socket.close(); } catch (IOException ignored) {}
             }
         }
