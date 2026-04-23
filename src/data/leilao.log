@@ -1,0 +1,79 @@
+
+===== LEILAO: LeilaoManual | 2026-04-23 15:40:12 =====
+[2026-04-23 15:40:09] status=ABERTURA | usuario=SISTEMA | produto=LeilaoManual | valor=0.00 | descricao=Leilao iniciado para o produto LeilaoManual com lance inicial de R$ 0.00.
+[2026-04-23 15:40:11] status=ACEITO | usuario=DaviJson | produto=LeilaoManual | valor=900.00 | descricao=DaviJson fez um lance no produto LeilaoManual por R$ 900.00.
+[2026-04-23 15:40:12] status=ENCERRADO | usuario=SISTEMA | produto=LeilaoManual | valor=900.00 | descricao=Leilao do produto LeilaoManual encerrado. Vencedor: DaviJson. Valor final: R$ 900.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: BezerroBrabo | 2026-04-23 15:46:31 =====
+[2026-04-23 15:45:49] status=ABERTURA | usuario=SISTEMA | produto=BezerroBrabo | valor=0.00 | descricao=Leilao iniciado para o produto BezerroBrabo com lance inicial de R$ 0.00.
+[2026-04-23 15:46:08] status=ACEITO | usuario=DaviJson | produto=BezerroBrabo | valor=8000.00 | descricao=DaviJson fez um lance no produto BezerroBrabo por R$ 8000.00.
+[2026-04-23 15:46:24] status=ACEITO | usuario=Nicole | produto=BezerroBrabo | valor=10250.00 | descricao=Nicole fez um lance no produto BezerroBrabo por R$ 10250.00.
+[2026-04-23 15:46:27] status=ACEITO | usuario=DaviJson | produto=BezerroBrabo | valor=15000.00 | descricao=DaviJson fez um lance no produto BezerroBrabo por R$ 15000.00.
+[2026-04-23 15:46:29] status=ACEITO | usuario=Nicole | produto=BezerroBrabo | valor=25000.00 | descricao=Nicole fez um lance no produto BezerroBrabo por R$ 25000.00.
+[2026-04-23 15:46:31] status=ENCERRADO | usuario=SISTEMA | produto=BezerroBrabo | valor=25000.00 | descricao=Leilao do produto BezerroBrabo encerrado. Vencedor: Nicole. Valor final: R$ 25000.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: Bezerro | 2026-04-23 15:47:40 =====
+[2026-04-23 15:46:53] status=ABERTURA | usuario=SISTEMA | produto=Bezerro | valor=0.00 | descricao=Leilao iniciado para o produto Bezerro com lance inicial de R$ 0.00.
+[2026-04-23 15:47:02] status=ACEITO | usuario=Davi | produto=Bezerro | valor=1500.00 | descricao=Davi fez um lance no produto Bezerro por R$ 1500.00.
+[2026-04-23 15:47:30] status=NEGADO | usuario=Nicole | produto=Bezerro | valor=1250.00 | descricao=Nicole tentou ofertar o produto Bezerro por R$ 1250.00, mas o lance atual e R$ 1500.00.
+[2026-04-23 15:47:33] status=NEGADO | usuario=Nicole | produto=Bezerro | valor=1000.00 | descricao=Nicole tentou ofertar o produto Bezerro por R$ 1000.00, mas o lance atual e R$ 1500.00.
+[2026-04-23 15:47:35] status=NEGADO | usuario=Nicole | produto=Bezerro | valor=1500.00 | descricao=Nicole tentou ofertar o produto Bezerro por R$ 1500.00, mas o lance atual e R$ 1500.00.
+[2026-04-23 15:47:37] status=ACEITO | usuario=Nicole | produto=Bezerro | valor=1600.00 | descricao=Nicole fez um lance no produto Bezerro por R$ 1600.00.
+[2026-04-23 15:47:40] status=ENCERRADO | usuario=SISTEMA | produto=Bezerro | valor=1600.00 | descricao=Leilao do produto Bezerro encerrado. Vencedor: Nicole. Valor final: R$ 1600.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: ProdutoDistribuido | 2026-04-23 16:07:26 =====
+[2026-04-23 16:07:26] status=ABERTURA | usuario=SISTEMA | produto=ProdutoDistribuido | valor=0.00 | descricao=Leilao iniciado para o produto ProdutoDistribuido com lance inicial de R$ 0.00.
+[2026-04-23 16:07:26] status=ENCERRADO | usuario=SISTEMA | produto=ProdutoDistribuido | valor=0.00 | descricao=Leilao do produto ProdutoDistribuido encerrado. Vencedor: Nenhum. Valor final: R$ 0.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: ProdutoDistribuidoComCliente | 2026-04-23 16:07:49 =====
+[2026-04-23 16:07:49] status=ABERTURA | usuario=SISTEMA | produto=ProdutoDistribuidoComCliente | valor=0.00 | descricao=Leilao iniciado para o produto ProdutoDistribuidoComCliente com lance inicial de R$ 0.00.
+[2026-04-23 16:07:49] status=ENCERRADO | usuario=SISTEMA | produto=ProdutoDistribuidoComCliente | valor=0.00 | descricao=Leilao do produto ProdutoDistribuidoComCliente encerrado. Vencedor: Nenhum. Valor final: R$ 0.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: ProdutoProbe | 2026-04-23 16:08:07 =====
+[2026-04-23 16:08:07] status=ABERTURA | usuario=SISTEMA | produto=ProdutoProbe | valor=0.00 | descricao=Leilao iniciado para o produto ProdutoProbe com lance inicial de R$ 0.00.
+[2026-04-23 16:08:07] status=ENCERRADO | usuario=SISTEMA | produto=ProdutoProbe | valor=0.00 | descricao=Leilao do produto ProdutoProbe encerrado. Vencedor: Nenhum. Valor final: R$ 0.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: ProdutoProcesso | 2026-04-23 16:08:43 =====
+[2026-04-23 16:08:42] status=ABERTURA | usuario=SISTEMA | produto=ProdutoProcesso | valor=0.00 | descricao=Leilao iniciado para o produto ProdutoProcesso com lance inicial de R$ 0.00.
+[2026-04-23 16:08:43] status=ENCERRADO | usuario=SISTEMA | produto=ProdutoProcesso | valor=0.00 | descricao=Leilao do produto ProdutoProcesso encerrado. Vencedor: Nenhum. Valor final: R$ 0.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: ProdutoProcesso | 2026-04-23 16:09:30 =====
+[2026-04-23 16:09:30] status=ABERTURA | usuario=SISTEMA | produto=ProdutoProcesso | valor=0.00 | descricao=Leilao iniciado para o produto ProdutoProcesso com lance inicial de R$ 0.00.
+[2026-04-23 16:09:30] status=ENCERRADO | usuario=SISTEMA | produto=ProdutoProcesso | valor=0.00 | descricao=Leilao do produto ProdutoProcesso encerrado. Vencedor: Nenhum. Valor final: R$ 0.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: ProdutoForeground | 2026-04-23 16:10:02 =====
+[2026-04-23 16:10:02] status=ABERTURA | usuario=SISTEMA | produto=ProdutoForeground | valor=0.00 | descricao=Leilao iniciado para o produto ProdutoForeground com lance inicial de R$ 0.00.
+[2026-04-23 16:10:02] status=ENCERRADO | usuario=SISTEMA | produto=ProdutoForeground | valor=0.00 | descricao=Leilao do produto ProdutoForeground encerrado. Vencedor: Nenhum. Valor final: R$ 0.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: ProdutoProbeForeground | 2026-04-23 16:10:21 =====
+[2026-04-23 16:10:21] status=ABERTURA | usuario=SISTEMA | produto=ProdutoProbeForeground | valor=0.00 | descricao=Leilao iniciado para o produto ProdutoProbeForeground com lance inicial de R$ 0.00.
+[2026-04-23 16:10:21] status=ENCERRADO | usuario=SISTEMA | produto=ProdutoProbeForeground | valor=0.00 | descricao=Leilao do produto ProdutoProbeForeground encerrado. Vencedor: Nenhum. Valor final: R$ 0.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: ProdutoProbeForeground2 | 2026-04-23 16:11:00 =====
+[2026-04-23 16:11:00] status=ABERTURA | usuario=SISTEMA | produto=ProdutoProbeForeground2 | valor=0.00 | descricao=Leilao iniciado para o produto ProdutoProbeForeground2 com lance inicial de R$ 0.00.
+[2026-04-23 16:11:00] status=ENCERRADO | usuario=SISTEMA | produto=ProdutoProbeForeground2 | valor=0.00 | descricao=Leilao do produto ProdutoProbeForeground2 encerrado. Vencedor: Nenhum. Valor final: R$ 0.00.
+===== FIM DO LEILAO =====
+
+===== LEILAO: Bezerro | 2026-04-23 16:28:12 =====
+[2026-04-23 16:25:59] status=ABERTURA | usuario=SISTEMA | produto=Bezerro | valor=0.00 | descricao=Leilao iniciado para o produto Bezerro com lance inicial de R$ 0.00.
+[2026-04-23 16:27:12] status=ACEITO | usuario=Nicole | produto=Bezerro | valor=15000.00 | descricao=Nicole fez um lance no produto Bezerro por R$ 15000.00.
+[2026-04-23 16:27:23] status=ACEITO | usuario=Davi | produto=Bezerro | valor=16000.00 | descricao=Davi fez um lance no produto Bezerro por R$ 16000.00.
+[2026-04-23 16:27:26] status=ACEITO | usuario=Davi | produto=Bezerro | valor=16500.00 | descricao=Davi fez um lance no produto Bezerro por R$ 16500.00.
+[2026-04-23 16:27:29] status=ACEITO | usuario=Nicole | produto=Bezerro | valor=17250.00 | descricao=Nicole fez um lance no produto Bezerro por R$ 17250.00.
+[2026-04-23 16:27:39] status=NEGADO | usuario=Davi | produto=Bezerro | valor=17000.00 | descricao=Davi tentou ofertar o produto Bezerro por R$ 17000.00, mas o lance atual e R$ 17250.00.
+[2026-04-23 16:27:53] status=NEGADO | usuario=Davi | produto=Bezerro | valor=17249.00 | descricao=Davi tentou ofertar o produto Bezerro por R$ 17249.00, mas o lance atual e R$ 17250.00.
+[2026-04-23 16:28:03] status=ACEITO | usuario=Davi | produto=Bezerro | valor=17500.00 | descricao=Davi fez um lance no produto Bezerro por R$ 17500.00.
+[2026-04-23 16:28:05] status=ACEITO | usuario=Nicole | produto=Bezerro | valor=18000.00 | descricao=Nicole fez um lance no produto Bezerro por R$ 18000.00.
+[2026-04-23 16:28:12] status=ENCERRADO | usuario=SISTEMA | produto=Bezerro | valor=18000.00 | descricao=Leilao do produto Bezerro encerrado. Vencedor: Nicole. Valor final: R$ 18000.00.
+===== FIM DO LEILAO =====
+
